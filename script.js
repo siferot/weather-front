@@ -46,7 +46,7 @@ function getDayName(range) {
 const currentWeather = {};
 
 const currentWeatherResponse = fetch(
-  "https://weather-app-as-apple.herokuapp.com1/api/weather/current"
+  "https://weather-app-as-apple.herokuapp.com/api/weather/current"
 )
   .then((res) => res.json())
   .catch((error) => {
@@ -64,7 +64,7 @@ const currentWeatherResponse = fetch(
   
 
 const hoursForecastWeatherResponse = fetch(
-  "https://weather-app-as-apple.herokuapp.com1/api/weather/hoursForecast"
+  "https://weather-app-as-apple.herokuapp.com/api/weather/hoursForecast"
 )
   .then((res) => res.json())
   .catch((error) => {
@@ -96,7 +96,7 @@ const hoursForecastWeatherResponse = fetch(
     } );
 
 const forecastResponse = fetch(
-  "https://weather-app-as-apple.herokuapp.com1/api/weather/forecast"
+  "https://weather-app-as-apple.herokuapp.com/api/weather/forecast"
 )
   .then((res) => res.json())
   .then((forecastArr) => {
