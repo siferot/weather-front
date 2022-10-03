@@ -56,7 +56,7 @@ const currentWeatherResponse = fetch(
   .then((weather) => {
     currentWeather.text = weather.text;
     currentWeather.temp = weather.temperature;
-    currentWeather.location = "Khabarovsk";
+    currentWeather.location = "Beersheba";
     console.log(weather);
     updateCurrentWeather();
     createBackground(weather.icon);
