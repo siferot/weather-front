@@ -46,7 +46,7 @@ function getDayName(range) {
 const currentWeather = {};
 
 const currentWeatherResponse = fetch(
-  "https://weather-app-as-apple.herokuapp.com/api/weather/current"
+  "https://weather-app-as-apple.herokuapp.com1/api/weather/current"
 )
   .then((res) => res.json())
   .catch((error) => {
@@ -64,7 +64,7 @@ const currentWeatherResponse = fetch(
   
 
 const hoursForecastWeatherResponse = fetch(
-  "https://weather-app-as-apple.herokuapp.com/api/weather/hoursForecast"
+  "https://weather-app-as-apple.herokuapp.com1/api/weather/hoursForecast"
 )
   .then((res) => res.json())
   .catch((error) => {
@@ -84,10 +84,19 @@ const hoursForecastWeatherResponse = fetch(
   })
   .then((weather) => {
     updateHoursForecast(weather);
-  });
+  })
+  .finally(() => {
+      var splide = new Splide( '.splide', {
+          drag: 'free',
+          perPage: 5,
+          arrows: false,
+          pagination: false,
+      } );
+      splide.mount();
+    } );
 
 const forecastResponse = fetch(
-  "https://weather-app-as-apple.herokuapp.com/api/weather/forecast"
+  "https://weather-app-as-apple.herokuapp.com1/api/weather/forecast"
 )
   .then((res) => res.json())
   .then((forecastArr) => {
@@ -134,9 +143,9 @@ const forecastResponse = fetch(
       forecastItem.append(forecastMax);
       forecastList.append(forecastItem);
     });
-    currentWeatherTempRange.innerHTML = `H:${Math.round(
+    currentWeatherTempRange.innerHTML = `L:${Math.round(
       forecastArr[0].tempMin
-    )}&deg;  L:${Math.round(forecastArr[0].tempMax)}&deg;`;
+    )}&deg;  H:${Math.round(forecastArr[0].tempMax)}&deg;`;
   });
 
 let currentWeatherItem = document.getElementsByClassName("current__weather")[0];
@@ -158,29 +167,48 @@ currentWeatherTempRange.setAttribute("class", "current__weather-tempRange");
 currentWeatherItem.append(currentWeatherTempRange);
 
 const updateHoursForecast = (weather) => {
-  const hoursForecast = document.getElementsByClassName("hours__forecast")[0];
-  hoursForecast.scrollLeft = 50;
-  hoursForecast.addEventListener("swipe" , (event) => {
-    console.log(event);
-  })
-  hoursForecast.addEventListener("wheel", (event) => {
-    event.preventDefault();
-    hoursForecast.scrollLeft += event.deltaY;
-    if (hoursForecast.scrollLeft <= 50) {
-      setTimeout(() => (hoursForecast.scrollLeft = 50), 100);
-    }
-    if (hoursForecast.scrollLeft >= 450) {
-      setTimeout(() => (hoursForecast.scrollLeft = 450), 100);
-    }
-    console.log(hoursForecast.scrollLeft);
-  });
+  // const hoursForecast = document.getElementsByClassName("hours__forecast")[0];
+  // hoursForecast.scrollLeft = 50;
+  // hoursForecast.addEventListener("swipe" , (event) => {
+  //   console.log(event);
+  // })
+  // hoursForecast.addEventListener("wheel", (event) => {
+  //   event.preventDefault();
+  //   hoursForecast.scrollLeft += event.deltaY;
+  //   if (hoursForecast.scrollLeft <= 50) {
+  //     setTimeout(() => (hoursForecast.scrollLeft = 50), 100);
+  //   }
+  //   if (hoursForecast.scrollLeft >= 450) {
+  //     setTimeout(() => (hoursForecast.scrollLeft = 450), 100);
+  //   }
+  //   console.log(hoursForecast.scrollLeft);
+  // });
 
-  const hoursForecastSlider = document.createElement("div");
-  hoursForecastSlider.setAttribute("class", "hours__forecast-slider");
+  // const hoursForecastSlider = document.createElement("div");
+  // hoursForecastSlider.setAttribute("class", "hours__forecast-slider");
 
-  hoursForecast.append(hoursForecastSlider);
+  // hoursForecast.append(hoursForecastSlider);
 
-  const hoursElements = weather.map((hourForecast) => {
+  // const hoursElements = weather.map((hourForecast) => {
+  //   let hourElement = document.createElement("div");
+
+  //   let hourTitle = document.createElement("h2");
+  //   hourTitle.innerHTML = hourForecast.time.substring(11, 13);
+
+  //   let hourIcon = document.createElement("img");
+  //   // hourIcon.setAttribute("class", "forecast__item-icon");
+  //   hourIcon.src = `https://developer.accuweather.com/sites/default/files/${
+  //     hourForecast.icon < 10 ? "0" + hourForecast.icon : hourForecast.icon
+  //   }-s.png`;
+
+  //   let hourTemp = document.createElement("h2");
+  //   hourTemp.innerHTML = hourForecast.temp;
+  //   hourElement.append(hourTitle, hourIcon, hourTemp);
+  //   hourElement.setAttribute("class", "hours__forecast-card");
+  //   return hourElement;
+  // });
+  const hoursSplideList = document.getElementsByClassName("splide__list")[0];
+  const hoursSplideElements = weather.map((hourForecast) => {
     let hourElement = document.createElement("div");
 
     let hourTitle = document.createElement("h2");
@@ -196,9 +224,15 @@ const updateHoursForecast = (weather) => {
     hourTemp.innerHTML = hourForecast.temp;
     hourElement.append(hourTitle, hourIcon, hourTemp);
     hourElement.setAttribute("class", "hours__forecast-card");
-    return hourElement;
+
+    let slideElement = document.createElement("li");
+    slideElement.setAttribute("class", "splide__slide");
+    slideElement.append(hourElement);
+    hoursSplideList.append(slideElement);
+    return slideElement;
   });
-  hoursElements.forEach((elem) => hoursForecastSlider.append(elem));
+
+  // hoursElements.forEach((elem) => hoursForecastSlider.append(elem));
 };
 
 const updateCurrentWeather = () => {
@@ -330,7 +364,7 @@ function createBackground(icon) {
 
   function sunnyWeather() {
     const sunRay = document.createElement("img");
-    sunRay.src = "/front/image/sunray.png";
+    sunRay.src = "/image/sunray.png";
     sunRay.setAttribute("class", "sunray");
     background.appendChild(sunRay);
   }
@@ -339,7 +373,7 @@ function createBackground(icon) {
     for (let i = 1; i <= cloudNumber; i++) {
       const cloud = document.createElement("img");
       const fileNumber = i <= 6 ? i : i % 6;
-      cloud.src = "/front/image/cloud-0" + fileNumber + ".png";
+      cloud.src = "/image/cloud-0" + fileNumber + ".png";
       cloud.setAttribute("class", "cloud cloud0" + fileNumber);
       cloud.style.filter = `brightness(${brightness}%)`;
       const style = document.createElement("style");

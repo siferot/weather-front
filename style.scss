@@ -1,8 +1,8 @@
 // @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 @font-face {
     font-family: 'San Francisco Text Light';
-    src: url('/front/font/SFUIText-Light.eot');
-    src: url('/front/font/SFUIText-Light.eot?#iefix') format('embedded-opentype'), url('/front/font/SFUIText-Light.woff') format('woff'), url('/front/font/SFUIText-Light.ttf') format('truetype');
+    src: url('/font/SFUIText-Light.eot');
+    src: url('/font/SFUIText-Light.eot?#iefix') format('embedded-opentype'), url('font/SFUIText-Light.woff') format('woff'), url('/front/font/SFUIText-Light.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -11,10 +11,13 @@
     font-family: "San Francisco Text Light", sans-serif;
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
     color: white;
 }
 
-body {}
+body {
+    
+}
 
 .verticalLines {
     height: 1px;
@@ -28,22 +31,36 @@ body {}
 // .tempPoints {
 //     width: 5px;
 // }
-.fiveDayForecast {
-    padding: 30px;
-    width: 500px;
+
+
+.weather__content * {
+    z-index: 10;
+}
+
+
+.weather__content {
+    width: 560px;
     margin-left: auto;
-    margin-top: 30px;
+    margin-right: auto;
+}
+
+.fiveDayForecast {
+    padding: 1.8rem;
+    width: 100%;
+    margin-left: auto;
+    margin-top: 1.8rem;
     margin-right: auto;
     border-radius: 20px;
     backdrop-filter: blur(50px);
     background-color: rgba(218, 218, 218, 0.164);
 }
 
+
 .hours__forecast {
-    padding: 30px;
-    width: 500px;
+    padding: 1.8rem;
+    width: 100%;
     margin-left: auto;
-    margin-top: 150px;
+    margin-top: 9rem;
     margin-right: auto;
     border-radius: 20px;
     backdrop-filter: blur(50px);
@@ -63,6 +80,8 @@ body {}
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        margin-left: 15px;
+        margin-right: 15px;
     }
 }
 
@@ -152,14 +171,14 @@ body {}
     // .current__weather-location
     &__weather-location {
         text-shadow: 0px 0px 15px rgba(50, 50, 50, .7);
-        font-size: 36px;
+        font-size: 2.3rem;
     }
     // .current__weather-tempRange
     &__weather-tempRange {}
     // .current__weather-temp
     &__weather-temp {
         text-shadow: 0px 0px 10px rgba(50, 50, 50, .5);
-        font-size: 96px;
+        font-size: 6rem;
         padding-left: 24px;
     }
     // .current__weather-text
@@ -177,9 +196,8 @@ body {}
     padding-bottom: 50px;
 }
 
-.weather__content * {
-    z-index: 10;
-}
+
+
 
 .sunray {
     position: absolute;
@@ -209,5 +227,20 @@ body {}
     }
     100% {
         left: 80%;
+    }
+}
+
+@media screen and (max-width: 760px) {
+    .weather__content {
+        width: 90%;
+    }
+    html {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    html {
+        font-size: 12px;
     }
 }
