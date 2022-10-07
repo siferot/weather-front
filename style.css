@@ -47,10 +47,9 @@
 }
 
 .hours__forecast {
-  padding: 1.8rem;
+  padding: 1.8rem 0;
   width: 100%;
   margin-left: auto;
-  margin-top: 9rem;
   margin-right: auto;
   border-radius: 20px;
   -webkit-backdrop-filter: blur(50px);
@@ -88,8 +87,15 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-left: 15px;
-  margin-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.splide__track {
+  -webkit-mask-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), color-stop(1.8rem, black), color-stop(black), to(rgba(0, 0, 0, 0)));
+  -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0), black 1.8rem, black calc(100% - 1.8rem), rgba(0, 0, 0, 0) 100%);
+          mask-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), color-stop(1.8rem, black), color-stop(black), to(rgba(0, 0, 0, 0)));
+          mask-image: linear-gradient(to right, rgba(0, 0, 0, 0), black 1.8rem, black calc(100% - 1.8rem), rgba(0, 0, 0, 0) 100%);
 }
 
 .subtitle {
@@ -178,6 +184,7 @@
 
 .current__weather {
   margin-top: 150px;
+  margin-bottom: 9rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -224,7 +231,7 @@
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  height: 100%;
+  width: 33%;
   top: 0;
   left: 0;
   z-index: 1;
@@ -246,6 +253,68 @@
      object-fit: contain;
   -webkit-animation: animCloud 120s infinite linear;
           animation: animCloud 120s infinite linear;
+}
+
+.online__toggle {
+  z-index: 999;
+  position: fixed;
+  padding: 0.9rem 1.8rem;
+  border-radius: 0 0 10px 10px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.6);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 5px;
+}
+
+input[type=checkbox] {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+label {
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 70px;
+  height: 35px;
+  background: grey;
+  display: block;
+  border-radius: 35px;
+  position: relative;
+}
+
+label:after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 31px;
+  height: 31px;
+  background: #fff;
+  border-radius: 50%;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+input:checked + label {
+  background: #bada55;
+}
+
+input:checked + label:after {
+  left: calc(100% - 2px);
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
 }
 
 @-webkit-keyframes animCloud {

@@ -1,3 +1,24 @@
+function getWeatherUrls (isOnline) {
+  return isOnline ? {  current: "https://weather-app-as-apple.herokuapp.com/api/weather/current",
+  hours: "https://weather-app-as-apple.herokuapp.com/api/weather/hoursForecast",
+  fiveDays: "https://weather-app-as-apple.herokuapp.com/api/weather/forecast",
+} : {
+  current: "",
+  hours: "",
+  fiveDays: "",
+}
+}
+
+let isOnline = false;
+isOnline = localStorage.getItem("isOnline");
+console.log(isOnline)
+if (isOnline) {
+  let label = document.getElementsByClassName("online__toggle")[0];
+  label.firstChild.innerHTML = "Weather is online";
+  let input = document.getElementById("isOnline");
+  input.checked = true;
+}
+
 function calculateRange(tempData) {
   let { tempMin: lowestTemp, tempMax: highestTemp } = tempData[0];
   tempData.forEach((elem) => {
@@ -45,8 +66,10 @@ function getDayName(range) {
 
 const currentWeather = {};
 
+
+
 const currentWeatherResponse = fetch(
-  "https://weather-app-as-apple.herokuapp.com/api/weather/current"
+  getWeatherUrls(isOnline).current
 )
   .then((res) => res.json())
   .catch((error) => {
@@ -64,7 +87,7 @@ const currentWeatherResponse = fetch(
   
 
 const hoursForecastWeatherResponse = fetch(
-  "https://weather-app-as-apple.herokuapp.com/api/weather/hoursForecast"
+  getWeatherUrls(isOnline).hours
 )
   .then((res) => res.json())
   .catch((error) => {
@@ -96,7 +119,7 @@ const hoursForecastWeatherResponse = fetch(
     } );
 
 const forecastResponse = fetch(
-  "https://weather-app-as-apple.herokuapp.com/api/weather/forecast"
+  getWeatherUrls(isOnline).fiveDays
 )
   .then((res) => res.json())
   .then((forecastArr) => {
@@ -396,3 +419,21 @@ function createBackground(icon) {
     }
   }
 }
+
+let checkbox = document.getElementById("isOnline");
+
+
+checkbox.addEventListener('change', function() {
+  let label = document.getElementById("labelIsOnline");
+  if (this.checked) {
+    console.log("Checkbox is checked..");
+    label.innerHTML = "Weather is online";
+    isOnline = true;
+  } else {
+    console.log("Checkbox is not checked..");
+    label.innerHTML = "Weather is offline";
+    isOnline = false;
+  }
+  localStorage.setItem("isOnline", isOnline);
+  window.location.reload();
+});
