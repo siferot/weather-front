@@ -10,14 +10,6 @@ function getWeatherUrls (isOnline) {
 }
 
 let isOnline = false;
-isOnline = localStorage.getItem("isOnline");
-console.log(isOnline)
-if (isOnline) {
-  let label = document.getElementsByClassName("online__toggle")[0];
-  label.firstChild.innerHTML = "Weather is online";
-  let input = document.getElementById("isOnline");
-  input.checked = true;
-}
 
 function calculateRange(tempData) {
   let { tempMin: lowestTemp, tempMax: highestTemp } = tempData[0];
@@ -122,7 +114,38 @@ const forecastResponse = fetch(
   getWeatherUrls(isOnline).fiveDays
 )
   .then((res) => res.json())
+  .catch((error) => {
+    console.log(error);
+    return [
+      {
+          "tempMin": 14,
+          "tempMax": 27,
+          "icon": 2
+      },
+      {
+          "tempMin": 14,
+          "tempMax": 27,
+          "icon": 2
+      },
+      {
+          "tempMin": 15,
+          "tempMax": 28,
+          "icon": 1
+      },
+      {
+          "tempMin": 15,
+          "tempMax": 29,
+          "icon": 1
+      },
+      {
+          "tempMin": 16,
+          "tempMax": 29,
+          "icon": 2
+      }
+  ]
+  })
   .then((forecastArr) => {
+    console.log(forecastArr);
     const weekRange = calculateRange(forecastArr);
     let graphArray = forecastArr.map((elem) => {
       return createGraph(elem, weekRange);
@@ -419,21 +442,3 @@ function createBackground(icon) {
     }
   }
 }
-
-let checkbox = document.getElementById("isOnline");
-
-
-checkbox.addEventListener('change', function() {
-  let label = document.getElementById("labelIsOnline");
-  if (this.checked) {
-    console.log("Checkbox is checked..");
-    label.innerHTML = "Weather is online";
-    isOnline = true;
-  } else {
-    console.log("Checkbox is not checked..");
-    label.innerHTML = "Weather is offline";
-    isOnline = false;
-  }
-  localStorage.setItem("isOnline", isOnline);
-  window.location.reload();
-});

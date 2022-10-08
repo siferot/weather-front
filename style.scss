@@ -44,6 +44,38 @@ body {
     margin-right: auto;
 }
 
+
+.current {
+    &__weather {
+        
+        margin-top: 10rem;
+        margin-bottom: 9rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    // .current__weather-location
+    &__weather-location {
+        text-shadow: 0px 0px 15px rgba(50, 50, 50, .7);
+        font-size: 2.3rem;
+    }
+    // .current__weather-tempRange
+    &__weather-tempRange {
+        text-shadow: 0px 0px 20px rgba(0, 0, 0, .9);
+    }
+    // .current__weather-temp
+    &__weather-temp {
+        text-shadow: 0px 0px 10px rgba(50, 50, 50, .5);
+        font-size: 6rem;
+        padding-left: 24px;
+    }
+    // .current__weather-text
+    &__weather-text {
+        text-shadow: 0px 0px 20px rgba(0, 0, 0, .9);
+    }
+}
+
 .fiveDayForecast {
     padding: 1.8rem;
     width: 100%;
@@ -103,6 +135,8 @@ body {
     }
 }
 
+
+
 .forecast {
     // .forecast__list
     &__list {
@@ -110,7 +144,7 @@ body {
     }
     // .forecast__item-weekday
     &__item-weekday {
-        width: 70px;
+        min-width: 4rem;
         font-weight: 500;
     }
     // .forecast__item-icon
@@ -132,8 +166,9 @@ body {
     // .forecast__item-graph
     &__item-graph {
         margin-top: 2px;
-        margin-left: 10px;
-        margin-right: 10px;
+        margin-left: 0.6rem;
+        margin-right: 0.6rem;
+        width: 40%;
     }
     // .forecast__list-item
     &__list-item {
@@ -158,7 +193,7 @@ body {
         height: 5px;
         border-radius: 4px;
         // width: 30%;
-        width: 150px;
+        width: 100%;
         background-color: rgba(255, 248, 248, 0.185);
     }
     &__graph-dayGraph {
@@ -167,34 +202,6 @@ body {
     }
 }
 
-.current {
-    &__weather {
-        
-        margin-top: 150px;
-        margin-bottom: 9rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    // .current__weather-location
-    &__weather-location {
-        text-shadow: 0px 0px 15px rgba(50, 50, 50, .7);
-        font-size: 2.3rem;
-    }
-    // .current__weather-tempRange
-    &__weather-tempRange {}
-    // .current__weather-temp
-    &__weather-temp {
-        text-shadow: 0px 0px 10px rgba(50, 50, 50, .5);
-        font-size: 6rem;
-        padding-left: 24px;
-    }
-    // .current__weather-text
-    &__weather-text {
-        text-shadow: 0px 0px 20px rgba(50, 50, 50, .8);
-    }
-}
 
 .background__container {
     background: linear-gradient(180deg, rgba(54, 93, 145, 1) 0%, rgba(108, 155, 215, 1) 100%);
@@ -211,7 +218,7 @@ body {
 .sunray {
     position: absolute;
     user-select: none;
-    width: 33%;
+    width: 100%;
     top: 0;
     left: 0;
     z-index: 1;
@@ -219,7 +226,7 @@ body {
 
 .cloud {
     width: 100%;
-    height: 600px;
+    height: 70%;
     left: 0;
     top: 0;
     z-index: 2;
@@ -314,5 +321,11 @@ input:checked + label:after {
 @media screen and (max-width: 450px) {
     html {
         font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    html {
+        font-size: 10px;
     }
 }
